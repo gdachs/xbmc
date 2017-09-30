@@ -249,7 +249,7 @@ namespace PERIPHERALS
 
     bool SupportsCEC() const
     {
-#if defined(HAVE_LIBCEC)
+#if defined(HAVE_LIBCEC) || defined(HAVE_CECFRAMEWORK)
       return true;
 #else
       return false;
@@ -324,6 +324,9 @@ namespace PERIPHERALS
     // Construction parameters
     ANNOUNCEMENT::CAnnouncementManager &m_announcements;
 
+#if !defined(HAVE_CECFRAMEWORK)
+    bool                                 m_bMissingCecFrameworkWarningDisplayed = false;
+#endif
 #if !defined(HAVE_LIBCEC)
     bool                                 m_bMissingLibCecWarningDisplayed = false;
 #endif
